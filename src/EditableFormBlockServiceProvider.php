@@ -2,7 +2,9 @@
 
 namespace GIS\EditableFormBlock;
 
+use GIS\EditableFormBlock\Livewire\Admin\Types\RequestFormWire;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class EditableFormBlockServiceProvider extends ServiceProvider
 {
@@ -26,7 +28,12 @@ class EditableFormBlockServiceProvider extends ServiceProvider
 
     protected function addLivewireComponents(): void
     {
-
+        // Types
+        $component = config("editable-form-block.customRequestFormComponent");
+        Livewire::component(
+            "efb-request-form",
+            $component ?? RequestFormWire::class
+        );
     }
 
     protected function expandConfiguration(): void
@@ -36,8 +43,8 @@ class EditableFormBlockServiceProvider extends ServiceProvider
         $types = $eb["availableTypes"];
         $types["requestForm"] = [
             "title" => config("editable-form-block.buttonTitle"),
-            "admin" => "eb-image-text",
-            "render" => "eb::types.image-text",
+            "admin" => config("editable-form-block.adminComponent"),
+            "render" => config("editable-form-block.webComponent"),
         ];
         app()->config["editable-blocks.availableTypes"] = $types;
     }
