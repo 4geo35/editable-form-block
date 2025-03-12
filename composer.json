@@ -1,0 +1,27 @@
+{
+    "name": "4geo35/editable-form-block",
+    "description": "Add form block",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir",
+            "email": "aweram-team@yandex.ru"
+        }
+    ],
+    "require": {
+        "4geo35/editable-blocks": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "GIS\\EditableFormBlock\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GIS\\EditableFormBlock\\EditableFormBlockServiceProvider"
+            ]
+        }
+    }
+}
