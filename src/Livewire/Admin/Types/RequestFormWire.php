@@ -31,6 +31,7 @@ class RequestFormWire extends Component
             "title" => ["required", "string", "max:150"],
             "description" => ["nullable", "string"],
             "image" => ["nullable", "image"],
+            "formType" => ["required", "string"],
         ];
     }
 
@@ -40,6 +41,7 @@ class RequestFormWire extends Component
             "title" => "Заголовок",
             "description" => "Описание",
             "image" => "Изображение",
+            "formType" => "Форма"
         ];
     }
 
