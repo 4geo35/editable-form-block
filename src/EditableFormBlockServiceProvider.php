@@ -22,6 +22,9 @@ class EditableFormBlockServiceProvider extends ServiceProvider
 
     public function register(): void
     {
+        // migrations
+        $this->loadMigrationsFrom(__DIR__ . "/database/migrations");
+
         // Config
         $this->mergeConfigFrom(__DIR__ . "/config/editable-form-block.php", "editable-form-block");
     }
