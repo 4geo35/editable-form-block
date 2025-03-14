@@ -18,6 +18,8 @@ return [
 
     // Templates
     "templates" => [
-        "request-form-record" => \GIS\EditableFormBlock\Templates\RequestFormRecord::class
+        "request-form-record" => \GIS\EditableFormBlock\Templates\RequestFormRecord::class,
+        "request-form-record-tablet" => \GIS\EditableFormBlock\Templates\RequestFormRecordTablet::class,
+        "request-form-record-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordMobile::class,
     ],
 ];

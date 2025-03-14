@@ -30,7 +30,7 @@
                         </div>
                     @endif
                 @else
-                    <div class="rounded-base bg-primary/20 p-indent {{ $hasImage ? "mt-indent-double" : "" }}">
+                    <div class="rounded-base bg-primary/25 p-indent {{ $hasImage ? "mt-indent-double" : "" }}">
                         @if ($hasImage)
                             <div class="row">
                                 <div class="col w-4/12 ml-auto">
