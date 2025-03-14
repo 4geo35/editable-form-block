@@ -6,9 +6,11 @@
         @if ($hasImage)
             <div class="row">
                 <div class="col w-full lg:w-1/2 ml-auto order-last {{ $index % 2 > 0 ? 'lg:order-first' : 'lg:order-last' }}">
-                    @include("efb::web.types.request-form.includes.title")
-                    @include("efb::web.types.request-form.includes.description")
-                    @include("efb::web.types.request-form.includes.form-button")
+                    <div class="h-full flex flex-col justify-center mb-indent-half xl:w-[525px] mx-auto">
+                        <h3 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h3>
+                        @include("efb::web.types.request-form.includes.description")
+                        @include("efb::web.types.request-form.includes.form-button")
+                    </div>
                 </div>
                 <div class="col w-full lg:w-1/2 relative mb-indent-half lg:mb-0">
                     @include("efb::web.types.request-form.includes.button-image")

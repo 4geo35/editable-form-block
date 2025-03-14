@@ -3,10 +3,12 @@
     $prefix = $postfix = "block-{$item->block->id}";
 @endphp
 
-<button type="button" class="btn btn-primary" x-data
-        @click="$dispatch('show-request-form', { key: 'call-request', place : 'Блок {{ $item->block->render_title ? $item->block->render_title : $item->block->title }}, {{ $item->title }}'})">
-    {{ $item->recordable->button_text ? $item->recordable->button_text : "Заказать" }}
-</button>
+<div>
+    <button type="button" class="btn btn-primary" x-data
+            @click="$dispatch('show-request-form', { key: 'call-request', place : 'Блок {{ $item->block->render_title ? $item->block->render_title : $item->block->title }}, {{ $item->title }}'})">
+        {{ $item->recordable->button_text ? $item->recordable->button_text : "Заказать" }}
+    </button>
+</div>
 
 @push("modals")
     <livewire:dynamic-component :component="$componentName" :modal="true"
