@@ -7,10 +7,10 @@
               class="space-y-indent-half"
               id="formRequestBlockDataForm-{{ $block->id }}">
             <div>
-                <label for="imageTextTitle-{{ $block->id }}" class="inline-block mb-2">
+                <label for="requestFormTitle-{{ $block->id }}" class="inline-block mb-2">
                     Заголовок <span class="text-danger">*</span>
                 </label>
-                <input type="text" id="imageTextTitle-{{ $block->id }}"
+                <input type="text" id="requestFormTitle-{{ $block->id }}"
                        class="form-control {{ $errors->has("title") ? "border-danger" : "" }}"
                        required
                        wire:loading.attr="disabled"
@@ -19,8 +19,33 @@
             </div>
 
             <div>
-                <label for="imageTextImage-{{ $block->id }}" class="inline-block mb-2">Изображение</label>
-                <input type="file" id="imageTextImage-{{ $block->id }}"
+                <label for="requestFormType-{{ $block->id }}" class="inline-block mb-2">
+                    Форма <span class="text-danger">*</span>
+                </label>
+                <select id="requestFormType-{{ $block->id }}"
+                        class="form-select {{ $errors->has('formType') }}" aria-label="Форма"
+                        required
+                        wire:loading.attr="disabled"
+                        wire:model="formType">
+                    <option value="">-- Выберите --</option>
+                    @foreach($formList as $item)
+                        <option value="{{ $item->key }}">{{ $item->title }}</option>
+                    @endforeach
+                </select>
+                <x-tt::form.error name="formType" />
+            </div>
+
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="requestFormModal-{{ $block->id }}"
+                       wire:model="useModal">
+                <label for="requestFormModal-{{ $block->id }}" class="form-check-label">
+                    Использовать модальное окно
+                </label>
+            </div>
+
+            <div>
+                <label for="requestFormImage-{{ $block->id }}" class="inline-block mb-2">Изображение</label>
+                <input type="file" id="requestFormImage-{{ $block->id }}"
                        class="form-control {{ $errors->has('image') ? 'border-danger' : '' }}"
                        wire:loading.attr="disabled"
                        wire:model.lazy="image">
@@ -35,13 +60,13 @@
             </div>
 
             <div>
-                <label for="imageTextDescription-{{ $block->id }}" class="flex justify-start items-center mb-2">
-                    Описание <span class="text-danger">*</span>
-                    @include("tt::admin.description-button", ["id" => "imageTextHidden-{$block->id}"])
+                <label for="requestFormDescription-{{ $block->id }}" class="flex justify-start items-center mb-2">
+                    Описание
+                    @include("tt::admin.description-button", ["id" => "requestFormHidden-{$block->id}"])
                 </label>
-                @include("tt::admin.description-info", ["id" => "imageTextHidden-{$block->id}"])
-                <textarea id="imageTextDescription-{{ $block->id }}" class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"
-                          rows="10" required
+                @include("tt::admin.description-info", ["id" => "requestFormHidden-{$block->id}"])
+                <textarea id="requestFormDescription-{{ $block->id }}" class="form-control !min-h-52 {{ $errors->has('description') ? 'border-danger' : '' }}"
+                          rows="10"
                           wire:model.live="description">
                         {{ $description }}
                     </textarea>
@@ -56,7 +81,8 @@
                 <button type="button" class="btn btn-outline-dark" wire:click="closeData">
                     Отмена
                 </button>
-                <button type="submit" form="imageTextBlockDataForm-{{ $block->id }}" class="btn btn-primary" wire:loading.attr="disabled">
+                <button type="submit" form="formRequestBlockDataForm-{{ $block->id }}" class="btn btn-primary"
+                        wire:loading.attr="disabled">
                     {{ $itemId ? "Обновить" : "Добавить" }}
                 </button>
             </div>

@@ -6,16 +6,20 @@ use GIS\EditableBlocks\Traits\CheckBlockAuthTrait;
 use GIS\EditableBlocks\Traits\EditBlockTrait;
 use GIS\EditableFormBlock\Interfaces\FormBlockRecordInterface;
 use GIS\EditableFormBlock\Models\FormBlockRecord;
+use GIS\RequestForm\Facades\FormActions;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
+use Livewire\WithFileUploads;
 
 class RequestFormWire extends Component
 {
-    use EditBlockTrait, CheckBlockAuthTrait;
+    use WithFileUploads, EditBlockTrait, CheckBlockAuthTrait;
 
     public bool $displayData = false;
     public bool $displayDelete = false;
+
+    public array $formList = [];
 
     public int|null $itemId = null;
     public string $formType = "";
@@ -61,6 +65,7 @@ class RequestFormWire extends Component
     {
         $this->resetFields();
         if (! $this->checkAuth("create")) { return; }
+        $this->setFormList();
         $this->displayData = true;
     }
 
@@ -95,6 +100,7 @@ class RequestFormWire extends Component
         $item = $this->findItem();
         if (! $item) { return; }
         if (! $this->checkAuth("update", true)) { return; }
+        $this->setFormList();
         $record = $item->recordable;
 
         $this->title = $item->title;
@@ -130,6 +136,11 @@ class RequestFormWire extends Component
 
         $this->closeData();
         session()->flash("item-{$this->block->id}-success", "Элемент успешно обновлен");
+    }
+
+    protected function setFormList(): void
+    {
+        $this->formList = FormActions::getFormList();
     }
 
     protected function resetFields(): void
