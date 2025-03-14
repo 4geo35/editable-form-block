@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "4geo35/editable-blocks": "^1.1"
+        "4geo35/editable-blocks": "^1.1",
+        "4geo35/request-form": "^1.0"
     },
     "autoload": {
         "psr-4": {
