@@ -2,7 +2,10 @@
 
 namespace GIS\EditableFormBlock;
 
+use GIS\EditableFormBlock\Helpers\FormBlockRenderActionsManager;
 use GIS\EditableFormBlock\Livewire\Admin\Types\RequestFormWire;
+use GIS\EditableFormBlock\Models\FormBlockRecord;
+use GIS\EditableFormBlock\Observers\FormBlockRecordObserver;
 use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -20,6 +23,11 @@ class EditableFormBlockServiceProvider extends ServiceProvider
 
         // Конфиг
         $this->expandConfiguration();
+
+        // Observers
+        $formRecordClass = config("editable-form-block.customFormBlockRecordModel") ?? FormBlockRecord::class;
+        $formRecordObserverClass = config("editable-form-block.customFormBlockObserverModel") ?? FormBlockRecordObserver::class;
+        $formRecordClass::observe($formRecordObserverClass);
     }
 
     public function register(): void
@@ -29,6 +37,17 @@ class EditableFormBlockServiceProvider extends ServiceProvider
 
         // Config
         $this->mergeConfigFrom(__DIR__ . "/config/editable-form-block.php", "editable-form-block");
+
+        // Facades
+        $this->initFacades();
+    }
+
+    protected function initFacades(): void
+    {
+        $this->app->singleton("form-block-render-actions", function () {
+            $formBlockRenderActionsManager = config("editable-form-block.customBlockRenderActionsManager") ?? FormBlockRenderActionsManager::class;
+            return new $formBlockRenderActionsManager;
+        });
     }
 
     protected function addLivewireComponents(): void
@@ -54,5 +73,9 @@ class EditableFormBlockServiceProvider extends ServiceProvider
             "render" => config("editable-form-block.webComponent"),
         ];
         app()->config["editable-blocks.availableTypes"] = $types;
+
+        $render = $eb["expandRender"];
+        $render["expandFormBlockRecord"] = config("editable-form-block.expandRender");
+        app()->config["editable-blocks.expandRender"] = $render;
     }
 }
