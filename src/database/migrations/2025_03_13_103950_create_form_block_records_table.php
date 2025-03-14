@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text("description")->nullable();
             $table->unsignedBigInteger("image_id")->nullable();
             $table->dateTime("use_modal")->nullable();
+            $table->string("button_text")->nullable();
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace GIS\EditableFormBlock\Livewire\Admin\Types;
 
 use GIS\EditableBlocks\Traits\CheckBlockAuthTrait;
+use GIS\EditableBlocks\Traits\DeleteImageTrait;
 use GIS\EditableBlocks\Traits\EditBlockTrait;
 use GIS\EditableFormBlock\Interfaces\FormBlockRecordInterface;
 use GIS\EditableFormBlock\Models\FormBlockRecord;
@@ -14,7 +15,7 @@ use Livewire\WithFileUploads;
 
 class RequestFormWire extends Component
 {
-    use WithFileUploads, EditBlockTrait, CheckBlockAuthTrait;
+    use WithFileUploads, EditBlockTrait, CheckBlockAuthTrait, DeleteImageTrait;
 
     public bool $displayData = false;
     public bool $displayDelete = false;
@@ -28,6 +29,7 @@ class RequestFormWire extends Component
     public TemporaryUploadedFile|null $image = null;
     public string|null $imageUrl = null;
     public bool $useModal = false;
+    public string $buttonText = "";
 
     public function rules(): array
     {
@@ -36,6 +38,7 @@ class RequestFormWire extends Component
             "description" => ["nullable", "string"],
             "image" => ["nullable", "image"],
             "formType" => ["required", "string"],
+            "buttonText" => ["nullable", "string", "max:50"],
         ];
     }
 
@@ -45,8 +48,14 @@ class RequestFormWire extends Component
             "title" => "Заголовок",
             "description" => "Описание",
             "image" => "Изображение",
-            "formType" => "Форма"
+            "formType" => "Форма",
+            "buttonText" => "Текст кнопки",
         ];
+    }
+
+    public function mount(): void
+    {
+        $this->setFormList();
     }
 
     public function render(): View
@@ -65,7 +74,6 @@ class RequestFormWire extends Component
     {
         $this->resetFields();
         if (! $this->checkAuth("create")) { return; }
-        $this->setFormList();
         $this->displayData = true;
     }
 
@@ -79,6 +87,7 @@ class RequestFormWire extends Component
             "description" => $this->description,
             "type" => $this->formType,
             "use_modal" => $this->useModal ? now() : null,
+            "button_text" => $this->buttonText,
         ]);
         /**
          * @var FormBlockRecordInterface $record
@@ -100,7 +109,6 @@ class RequestFormWire extends Component
         $item = $this->findItem();
         if (! $item) { return; }
         if (! $this->checkAuth("update", true)) { return; }
-        $this->setFormList();
         $record = $item->recordable;
 
         $this->title = $item->title;
@@ -110,6 +118,7 @@ class RequestFormWire extends Component
             $this->imageUrl = $record->image->storage;
         } else $this->imageUrl = null;
         $this->useModal = ! empty($record->use_modal);
+        $this->buttonText = $record->button_text;
         $this->formType = $record->type;
         $this->displayData = true;
     }
@@ -128,6 +137,7 @@ class RequestFormWire extends Component
             "description" => $this->description,
             "type" => $this->formType,
             "use_modal" => $this->useModal ? now() : null,
+            "button_text" => $this->buttonText,
         ]);
         $record->livewireImage($this->image);
         $item->update([
@@ -145,6 +155,6 @@ class RequestFormWire extends Component
 
     protected function resetFields(): void
     {
-        $this->reset("itemId", "formType", "title", "description", "image", "imageUrl");
+        $this->reset("itemId", "formType", "title", "description", "image", "imageUrl", "buttonText");
     }
 }

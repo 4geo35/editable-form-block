@@ -3,11 +3,13 @@
 namespace GIS\EditableFormBlock;
 
 use GIS\EditableFormBlock\Livewire\Admin\Types\RequestFormWire;
+use GIS\Fileable\Traits\ExpandTemplatesTrait;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
 class EditableFormBlockServiceProvider extends ServiceProvider
 {
+    use ExpandTemplatesTrait;
     public function boot(): void
     {
         // Views
@@ -42,6 +44,8 @@ class EditableFormBlockServiceProvider extends ServiceProvider
     protected function expandConfiguration(): void
     {
         $eb = app()->config["editable-blocks"];
+        $efb = app()->config["editable-form-block"];
+        $this->expandTemplates($efb);
 
         $types = $eb["availableTypes"];
         $types["requestForm"] = [

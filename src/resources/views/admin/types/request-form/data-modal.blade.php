@@ -37,11 +37,24 @@
 
             <div class="form-check">
                 <input type="checkbox" class="form-check-input" id="requestFormModal-{{ $block->id }}"
-                       wire:model="useModal">
+                       wire:model.live="useModal">
                 <label for="requestFormModal-{{ $block->id }}" class="form-check-label">
                     Использовать модальное окно
                 </label>
             </div>
+
+            @if ($useModal)
+                <div>
+                    <label for="requestFormButton-{{ $block->id }}" class="inline-block mb-2">
+                        Текст кнопки вызова формы
+                    </label>
+                    <input type="text" id="requestFormButton-{{ $block->id }}"
+                           class="form-control {{ $errors->has("buttonText") ? "border-danger" : "" }}"
+                           wire:loading.attr="disabled"
+                           wire:model="buttonText">
+                    <x-tt::form.error name="buttonText"/>
+                </div>
+            @endif
 
             <div>
                 <label for="requestFormImage-{{ $block->id }}" class="inline-block mb-2">Изображение</label>
@@ -50,13 +63,7 @@
                        wire:loading.attr="disabled"
                        wire:model.lazy="image">
                 <x-tt::form.error name="image" />
-                @if ($imageUrl)
-                    <div class="mt-indent-half">
-                        <a href="{{ $imageUrl }}" target="_blank" class="text-primary hover:text-primary-hover">
-                            Изображение
-                        </a>
-                    </div>
-                @endif
+                @include("eb::admin.types.includes.image-button")
             </div>
 
             <div>

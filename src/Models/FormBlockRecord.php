@@ -15,7 +15,8 @@ class FormBlockRecord extends Model implements FormBlockRecordInterface
     protected $fillable = [
         "description",
         "type",
-        "use_modal"
+        "use_modal",
+        "button_text",
     ];
 
     public function getMarkdownAttribute(): ?string

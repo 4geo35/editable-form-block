@@ -10,4 +10,9 @@ return [
 
     // Components
     "customRequestFormComponent" => null,
+
+    // Templates
+    "templates" => [
+        "request-form-record" => \GIS\EditableFormBlock\Templates\RequestFormRecord::class
+    ],
 ];
