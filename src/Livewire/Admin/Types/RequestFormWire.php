@@ -106,7 +106,7 @@ class RequestFormWire extends Component
     {
         $this->resetFields();
         $this->itemId = $id;
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) { return; }
         if (! $this->checkAuth("update", true)) { return; }
         $record = $item->recordable;
@@ -125,7 +125,7 @@ class RequestFormWire extends Component
 
     public function update(): void
     {
-        $item = $this->findItem();
+        $item = $this->findModel();
         if (! $item) { return; }
         if (! $this->checkAuth("update", true)) { return; }
         $record = $item->recordable;
