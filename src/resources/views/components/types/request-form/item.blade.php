@@ -1,7 +1,7 @@
 @props(["item", "index"])
 @php($hasImage = $item->recordable->image_id)
 @php($useModal = $item->recordable->use_modal)
-<div class="mb-indent">
+<div class="">
     @if ($useModal)
         @if ($hasImage)
             <div class="row">
