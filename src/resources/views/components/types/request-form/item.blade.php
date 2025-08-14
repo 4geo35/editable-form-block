@@ -1,4 +1,4 @@
-@props(["item", "index"])
+@props(["item", "index", "isFullPage" => true])
 @php($hasImage = $item->recordable->image_id)
 @php($useModal = $item->recordable->use_modal)
 <div class="">
