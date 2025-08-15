@@ -1,12 +1,19 @@
 <?php
 
 return [
-    "buttonTitle" => "Форма обратной связи",
-    "adminComponent" => "efb-request-form",
-    "webComponent" => "efb::types.request-form",
+    "availableTypes" => [
+        "requestForm" => [
+            "title" => "Форма обратной связи",
+            "admin" => "efb-request-form",
+            "render" => "efb::types.request-form",
+        ],
+    ],
+
     "expandRender" => [
-        "class" => \GIS\EditableFormBlock\Facades\FormBlockRenderActions::class,
-        "method" => "expandFormBlockRecord",
+        "expandFormBlockRecord" => [
+            "class" => \GIS\EditableFormBlock\Facades\FormBlockRenderActions::class,
+            "method" => "expandFormBlockRecord",
+        ],
     ],
 
     // Admin

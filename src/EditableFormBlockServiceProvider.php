@@ -2,6 +2,7 @@
 
 namespace GIS\EditableFormBlock;
 
+use GIS\EditableBlocks\Traits\ExpandBlocksTrait;
 use GIS\EditableFormBlock\Helpers\FormBlockRenderActionsManager;
 use GIS\EditableFormBlock\Livewire\Admin\Types\RequestFormWire;
 use GIS\EditableFormBlock\Models\FormBlockRecord;
@@ -12,7 +13,7 @@ use Livewire\Livewire;
 
 class EditableFormBlockServiceProvider extends ServiceProvider
 {
-    use ExpandTemplatesTrait;
+    use ExpandTemplatesTrait, ExpandBlocksTrait;
     public function boot(): void
     {
         // Views
@@ -62,20 +63,9 @@ class EditableFormBlockServiceProvider extends ServiceProvider
 
     protected function expandConfiguration(): void
     {
-        $eb = app()->config["editable-blocks"];
         $efb = app()->config["editable-form-block"];
         $this->expandTemplates($efb);
-
-        $types = $eb["availableTypes"];
-        $types["requestForm"] = [
-            "title" => config("editable-form-block.buttonTitle"),
-            "admin" => config("editable-form-block.adminComponent"),
-            "render" => config("editable-form-block.webComponent"),
-        ];
-        app()->config["editable-blocks.availableTypes"] = $types;
-
-        $render = $eb["expandRender"];
-        $render["expandFormBlockRecord"] = config("editable-form-block.expandRender");
-        app()->config["editable-blocks.expandRender"] = $render;
+        $this->expandBlocks($efb);
+        $this->expandBlockRender($efb);
     }
 }
