@@ -10,6 +10,6 @@ class RequestFormRecordTwoThirds implements ModifierInterface
 {
     public function apply(ImageInterface $image): ImageInterface
     {
-        return $image->cover(930, 418);
+        return $image->cover(952, 418);
     }
 }
