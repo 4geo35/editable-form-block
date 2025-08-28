@@ -5,12 +5,13 @@ namespace GIS\EditableFormBlock\Models;
 use GIS\EditableBlocks\Traits\ShouldBlockItem;
 use GIS\EditableFormBlock\Interfaces\FormBlockRecordInterface;
 use GIS\Fileable\Traits\ShouldImage;
+use GIS\TraitsHelpers\Traits\ShouldMarkdown;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class FormBlockRecord extends Model implements FormBlockRecordInterface
 {
-    use ShouldBlockItem, ShouldImage;
+    use ShouldBlockItem, ShouldImage, ShouldMarkdown;
 
     protected $fillable = [
         "description",
@@ -18,11 +19,4 @@ class FormBlockRecord extends Model implements FormBlockRecordInterface
         "use_modal",
         "button_text",
     ];
-
-    public function getMarkdownAttribute(): ?string
-    {
-        $value = $this->description;
-        if (! $value) return $value;
-        return Str::markdown($value);
-    }
 }
