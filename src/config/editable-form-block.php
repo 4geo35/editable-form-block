@@ -20,6 +20,9 @@ return [
     "customFormBlockRecordModel" => null,
     "customFormBlockObserverModel" => null,
 
+    // Manager
+    "customBlockRenderActionsManager" => null,
+
     // Components
     "customRequestFormComponent" => null,
 
