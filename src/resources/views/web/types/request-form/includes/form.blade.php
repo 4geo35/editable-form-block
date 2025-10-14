@@ -1,6 +1,6 @@
 @php
     $componentName = \GIS\RequestForm\Facades\FormActions::getComponentByKey($item->recordable->type);
-    $prefix = $postfix = "block-{$item->block->id}";
+    $prefix = $postfix = "block-{$item->block->id}-{$item->id}";
 @endphp
 
 <livewire:dynamic-component :component="$componentName"
