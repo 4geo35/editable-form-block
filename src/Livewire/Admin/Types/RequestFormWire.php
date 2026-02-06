@@ -5,6 +5,7 @@ namespace GIS\EditableFormBlock\Livewire\Admin\Types;
 use GIS\EditableBlocks\Traits\CheckBlockAuthTrait;
 use GIS\EditableBlocks\Traits\DeleteImageTrait;
 use GIS\EditableBlocks\Traits\EditBlockTrait;
+use GIS\EditableBlocks\Traits\PlaceholderBlockTrait;
 use GIS\EditableFormBlock\Interfaces\FormBlockRecordInterface;
 use GIS\EditableFormBlock\Models\FormBlockRecord;
 use GIS\RequestForm\Facades\FormActions;
@@ -15,7 +16,7 @@ use Livewire\WithFileUploads;
 
 class RequestFormWire extends Component
 {
-    use WithFileUploads, EditBlockTrait, CheckBlockAuthTrait, DeleteImageTrait;
+    use WithFileUploads, EditBlockTrait, CheckBlockAuthTrait, DeleteImageTrait, PlaceholderBlockTrait;
 
     public bool $displayData = false;
     public bool $displayDelete = false;
