@@ -4,6 +4,6 @@
     <picture class="not-prose">
         <source media="(min-width: 1024px)" srcset="{{ route('thumb-img', ['template' => $isFullPage ? 'request-form-record' : 'request-form-record-two-thirds', 'filename' => $fileName]) }}">
         <source media="(min-width: 480px)" srcset="{{ route('thumb-img', ['template' => 'request-form-record-tablet', 'filename' => $fileName]) }}">
-        <img src="{{ route('thumb-img', ['template' => 'image-text-record-mobile', 'filename' => $fileName]) }}" alt="" class="rounded-base">
+        <img src="{{ route('thumb-img', ['template' => 'request-form-record-full-mobile', 'filename' => $fileName]) }}" alt="" class="rounded-base">
     </picture>
 </a>

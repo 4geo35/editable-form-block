@@ -31,6 +31,7 @@ return [
         "request-form-record" => \GIS\EditableFormBlock\Templates\RequestFormRecord::class,
         "request-form-record-tablet" => \GIS\EditableFormBlock\Templates\RequestFormRecordTablet::class,
         "request-form-record-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordMobile::class,
+        "request-form-record-full-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordFullMobile::class,
 
         "request-form-record-two-thirds" => \GIS\EditableFormBlock\Templates\RequestFormRecordTwoThirds::class,
     ],
