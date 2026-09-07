@@ -1,11 +1,11 @@
-@props(["item", "index", "isFullPage" => true])
+@props(["item", "index", "isFullPage" => true, "hasTitle" => false])
 @php($hasImage = $item->recordable->image_id)
 @php($useModal = $item->recordable->use_modal)
 <div class="">
     @if ($useModal)
         @if ($hasImage)
             @include("efb::web.types.request-form.includes.button-image")
-            <h3 class="text-3xl xs:text-4xl lg:text-5xl font-bold mb-indent-half">{{ $item->title }}</h3>
+            @include("efb::web.types.request-form.includes.title")
             @include("efb::web.types.request-form.includes.description")
             @include("efb::web.types.request-form.includes.form-button")
         @else
