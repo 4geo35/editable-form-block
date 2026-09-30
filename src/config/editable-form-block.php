@@ -33,6 +33,10 @@ return [
         "request-form-record-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordMobile::class,
         "request-form-record-full-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordFullMobile::class,
 
+        "request-form-record-modal" => \GIS\EditableFormBlock\Templates\RequestFormRecordModal::class,
+        "request-form-record-modal-tablet" => \GIS\EditableFormBlock\Templates\RequestFormRecordModalTablet::class,
+        "request-form-record-modal-mobile" => \GIS\EditableFormBlock\Templates\RequestFormRecordModalMobile::class,
+
         "request-form-record-two-thirds" => \GIS\EditableFormBlock\Templates\RequestFormRecordTwoThirds::class,
     ],
 ];
