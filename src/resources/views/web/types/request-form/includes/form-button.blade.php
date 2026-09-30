@@ -7,7 +7,7 @@
 <div>
     <button type="button" class="btn btn-primary" x-data
             @click.stop="$dispatch('show-request-form', { key: '{{ $item->recordable->type }}', place : 'Блок {{ $item->block->render_title ? $item->block->render_title : $item->block->title }}, {{ $item->title }}', double: '{{ $double }}'})">
-        {{ $item->recordable->button_tex) ? $item->recordable->button_text : "Заказать" }}
+        {{ $item->recordable->button_tex ? $item->recordable->button_text : "Заказать" }}
     </button>
 </div>
 
